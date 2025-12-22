@@ -5,28 +5,45 @@ import pygame
 import time
 import sys
 
-from scenes.titlescreen import title_screen
-
 import config
 
+from scenes.titlescreen import title_screen
+from scenes.menuscreen import menu_screen
+
 pygame.init()
+
+icon = pygame.image.load("window_icons/default_icon.jpg")
+pygame.display.set_icon(icon)
+
 screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
-pygame.display.set_caption("Title Screen")
+pygame.display.set_caption("Bhudda Simulator 2025")
 
 scenes = {
     "TITLE": title_screen(screen),
+    "MENU": menu_screen(screen),
+    # "GAME": game_screen
 }
 
 current_scene = "TITLE"
 
-running = True
-while running:
-    next_scene = scenes[current_scene].handle_event()
+def main_loop():
+    global current_scene
 
-    if next_scene:
-        current_scene = next_scene
+    while True:
+        if current_scene == "QUIT":
+            pygame.quit()
+            sys.exit()
 
-    scenes[current_scene].update()
-    scenes[current_scene].draw()
-    pygame.display.flip()
-    pygame.time.Clock().tick(60)
+        next_scene = scenes[current_scene].handle_event()
+        if next_scene:
+            current_scene = next_scene
+
+        scenes[current_scene].update()
+
+        scenes[current_scene].draw()
+        pygame.display.flip()
+
+        pygame.time.Clock().tick(config.FPS)
+
+if __name__ == "__main__":
+    main_loop()
