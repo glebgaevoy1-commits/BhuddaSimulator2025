@@ -36,7 +36,7 @@ class title_screen:
                     return "MENU"
                 elif event.key == pygame.K_SPACE:
                     print("SPACE, GAME STARTED")
-                    self.gong_sfx.play() # MOVE THIS TO GAME
+                    self.gong_sfx.play()
                     return "GAME"
 
                 elif event.key == pygame.K_q:
