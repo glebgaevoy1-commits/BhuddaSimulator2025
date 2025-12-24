@@ -1,5 +1,4 @@
 import sys
-import cv2
 import pygame
 from pygame import mixer
 
@@ -7,13 +6,12 @@ import config
 
 pygame.mixer.init()
 
-class game_screen:
+class tutorial_screen:
     def __init__(self, screen):
         self.screen = screen
 
-        self.cam = cv2.VideoCapture(0)
-
         self.doit_sfx = pygame.mixer.Sound('SFX/doit_sfx.mp3')
+        self.gong_sfx = pygame.mixer.Sound('SFX/gong_sfx.mp3')
 
     def handle_event(self):
         for event in pygame.event.get():
@@ -24,6 +22,10 @@ class game_screen:
                     print("ESCAPE, MENU OPENED")
                     self.doit_sfx.play()
                     return "MENU"
+                elif event.key == pygame.K_SPACE:
+                    print("SPACE, GAME STARTED")
+                    self.gong_sfx.play()
+                    return "GAME"
                 elif event.key == pygame.K_q:
                     return "QUIT"
 
@@ -31,14 +33,4 @@ class game_screen:
         pass
 
     def draw(self):
-        ret, frame = self.cam.read()
-
-        self.screen.fill((0, 0, 0))
-
-        if ret:
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            frame_surface = pygame.surfarray.make_surface(frame)
-            frame_surface = pygame.transform.rotate(frame_surface, 270)
-            self.screen.blit(frame_surface, (config.SCREEN_WIDTH // 2 - frame.shape[1] // 2, config.SCREEN_HEIGHT // 2 - frame.shape[0] // 2))
-
-        pygame.display.flip()
+        self.screen.fill((0,255,0))

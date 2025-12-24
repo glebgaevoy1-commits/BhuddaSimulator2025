@@ -35,9 +35,9 @@ class title_screen:
                     self.doit_sfx.play()
                     return "MENU"
                 elif event.key == pygame.K_SPACE:
-                    print("SPACE, GAME STARTED")
+                    print("SPACE, TUTORIAL STARTED")
                     self.gong_sfx.play()
-                    return "GAME"
+                    return "TUTORIAL"
 
                 elif event.key == pygame.K_q:
                     print("QUIT, GAME CLOSED")

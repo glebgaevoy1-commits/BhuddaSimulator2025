@@ -9,6 +9,7 @@ import config
 
 from scenes.titlescreen import title_screen
 from scenes.menuscreen import menu_screen
+from scenes.tutorialscreen import tutorial_screen
 from scenes.gamescreen import game_screen
 
 pygame.init()
@@ -17,15 +18,18 @@ icon = pygame.image.load("window_icons/default_icon.jpg")
 pygame.display.set_icon(icon)
 
 screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
-pygame.display.set_caption("Bhudda Simulator 2025")
+pygame.display.set_caption("Loading...")
 
 current_scene = "TITLE"
 
 scenes = {
     "TITLE": title_screen(screen),
     "MENU": menu_screen(screen, current_scene),
+    "TUTORIAL": tutorial_screen(screen),
     "GAME": game_screen(screen),
 }
+
+pygame.display.set_caption("Bhudda Simulator 2025")
 
 def main_loop():
     global current_scene
